@@ -1,1 +1,1 @@
-from stackoverflowapithingy.stackoverflow import *
+from stackoverflowapithingy.stackoverflow import whatIsSettings, getQuestionByTags, getQuestionBySearch, getAnswerByQuestion, getAnswerById
