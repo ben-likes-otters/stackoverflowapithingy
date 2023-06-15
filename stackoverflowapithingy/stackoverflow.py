@@ -1,4 +1,9 @@
 import requests
+import re
+
+def remove_html_tags(text): #this is literally from google ai
+  clean_text = re.sub('<[^>]+>', '', text)
+  return clean_text
 
 #settings = {"q_per_page":1,"accepted":True,"sort":3,"default_tags":["python"]}
 def whatIsSettings():
@@ -25,3 +30,15 @@ def getAnswerById(answer_id):
     url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&site=stackoverflow&filter=withbody".format(answer_id)
     return requests.get(url).json()
 
+def formatResponse(response,isQuestion=True): #False if it is an answer
+    try:
+        title = ""
+        if isQuestion:
+            title = response['items'][0]['title']
+            
+        body = remove_html_tags(response['items'][0]['body'])
+        raw = response['items'][0]['body']
+        return [title,body,raw]
+    except:
+        raise ValueError("Invalid response passed")
+    
