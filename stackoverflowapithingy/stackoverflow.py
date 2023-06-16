@@ -25,7 +25,7 @@ def getAnswerByQuestion(question_id,sort="votes"):
 
 
 def getAnswerById(answer_id,sort="votes"):
-    url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&site=stackoverflow&filter=withbody".format(answer_id,sort)
+    url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&sort={1}&site=stackoverflow&filter=withbody".format(answer_id,sort)
     return requests.get(url).json()
 
 
