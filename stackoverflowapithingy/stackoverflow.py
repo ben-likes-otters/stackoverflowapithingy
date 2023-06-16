@@ -55,7 +55,7 @@ def getQandA(query,preformat=True,tags=["python"],q_per_page=1,page=1,accepted=T
         answer = getAnswerById(question['items'][0]['accepted_answer_id'])
     except:
         try:
-            answer = getAnswerByQuestion(question['items'][0]['question_id']
+            answer = getAnswerByQuestion(question['items'][0]['question_id'])
         raise ValueError("No accepted answer")
     
     if preformat:
