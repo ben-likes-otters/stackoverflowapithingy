@@ -4,28 +4,28 @@ from bs4 import BeautifulSoup
 
 #settings = {"q_per_page":1,"accepted":True,"sort":3,"default_tags":["python"]}
 def whatIsSettings():
-    return "settings = {\"q_per_page\":1,\"accepted\":True,\"sort\":3,\"default_tags\":[\"python\"]}\noh and sort order is activity, votes, creation, relevance\nalso tags should be an array :)"
+    return "settings = {\"q_per_page\":1,\"accepted\":True,\"sort\":3,\"default_tags\":[\"python\"]}\noh and sorts are activity, votes, creation, relevance\nalso tags should be an array :)"
 
 
-def getQuestionByTags(tags=["python"],q_per_page=1,page=1,accepted=True,sort=3): #tags is array
+def getQuestionByTags(tags=["python"],q_per_page=1,page=1,accepted=True,sort="relevance"): #tags is array
     formattedtags = ";".join(tags)
     url = "https://api.stackexchange.com/2.2/questions?page={0}&pagesize={1}&order=desc&sort=votes&tagged={2}&site=stackoverflow&filter=withbody".format(str(page),str(q_per_page),formattedtags)
     return requests.get(url).json() #returns question object(s)
 
 
-def getQuestionBySearch(query,tags=["python"],q_per_page=1,page=1,accepted=True,sort=3):
+def getQuestionBySearch(query,tags=["python"],q_per_page=1,page=1,accepted=True,sort="relevance"):
     formattedtags = ";".join(tags)
-    url = "https://api.stackexchange.com/2.3/search/advanced?page={0}&pagesize={1}&order=desc&sort={2}&q={3}&accepted={4}&tagged={5}&site=stackoverflow&filter=withbody".format(str(page),str(q_per_page),["activity","votes","creation","relevance"][sort],query,accepted,formattedtags)
+    url = "https://api.stackexchange.com/2.3/search/advanced?page={0}&pagesize={1}&order=desc&sort={2}&q={3}&accepted={4}&tagged={5}&site=stackoverflow&filter=withbody".format(str(page),str(q_per_page),sort,query,accepted,formattedtags)
     return requests.get(url).json()
 
 
-def getAnswerByQuestion(question_id,sort=3):
-    url = "https://api.stackexchange.com/2.3/questions/{0}/answers?order=desc&sort={1}&site=stackoverflow&filter=withbody".format(question_id,["activity","votes","creation","relevance"][sort])
+def getAnswerByQuestion(question_id,sort="relevance"):
+    url = "https://api.stackexchange.com/2.3/questions/{0}/answers?order=desc&sort={1}&site=stackoverflow&filter=withbody".format(question_id,sort)
     return requests.get(url).json()
 
 
-def getAnswerById(answer_id,sort=3):
-    url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&site=stackoverflow&filter=withbody".format(answer_id)
+def getAnswerById(answer_id,sort="relevance"):
+    url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&site=stackoverflow&filter=withbody".format(answer_id,sort)
     return requests.get(url).json()
 
 
