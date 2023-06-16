@@ -48,7 +48,7 @@ def formatResponse(response, isQuestion=True):  #False if it is an answer
         raise ValueError("Invalid response passed")
 
     
-def getQandA(query,preformat=True,tags=["python"],q_per_page=1,page=1,accepted=True,sort=3):
+def getQandA(query,preformat=True,tags=["python"],q_per_page=1,page=1,accepted=True,sort="relevance"):
     question = getQuestionBySearch(query,tags,q_per_page,page,accepted,sort)
     try:
         answer = getAnswerById(question['items'][0]['accepted_answer_id'])
