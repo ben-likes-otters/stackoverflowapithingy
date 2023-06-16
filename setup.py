@@ -1,8 +1,8 @@
 import setuptools
 
 setuptools.setup(
-    name="stackoverflowapithingy",
-    version="0.1.13.1",
-    packages=["stackoverflowapithingy"],
+    name="stack-overflow",
+    version="0.1.14",
+    packages=["stack-overflow"],
     install_requires=["requests","beautifulsoup4"],
 )
