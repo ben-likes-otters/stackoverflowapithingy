@@ -46,7 +46,6 @@ def formatResponse(response, isQuestion=True):  #False if it is an answer
         return soup.get_text()
     except:
         raise ValueError("Invalid response passed")
-    return
 
     
 def getQandA(query,preformat=True,tags=["python"],q_per_page=1,page=1,accepted=True,sort=3):
@@ -56,7 +55,8 @@ def getQandA(query,preformat=True,tags=["python"],q_per_page=1,page=1,accepted=T
     except:
         try:
             answer = getAnswerByQuestion(question['items'][0]['question_id'])
-        raise ValueError("No accepted answer")
+        except:
+            raise ValueError("No accepted answer")
     
     if preformat:
         return [formatResponse(question),formatResponse(answer,False)]
