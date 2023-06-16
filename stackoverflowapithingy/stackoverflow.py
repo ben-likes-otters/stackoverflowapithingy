@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 #settings = {"q_per_page":1,"accepted":True,"sort":3,"default_tags":["python"]}
 def whatIsSettings():
-    return "settings = {\"q_per_page\":1,\"accepted\":True,\"sort\":3,\"default_tags\":[\"python\"]}\noh and sorts are activity, votes, creation, relevance\nalso tags should be an array :)"
+    return "settings = {\"q_per_page\":1,\"accepted\":True,\"sort\":3,\"default_tags\":[\"python\"]}\noh and sorts are activity, votes, creation, relevance (for questions)\nfor answers sorts are activity, votes, creation\nalso tags should be an array :)"
 
 
 def getQuestionByTags(tags=["python"],q_per_page=1,page=1,accepted=True,sort="relevance"): #tags is array
@@ -19,12 +19,12 @@ def getQuestionBySearch(query,tags=["python"],q_per_page=1,page=1,accepted=True,
     return requests.get(url).json()
 
 
-def getAnswerByQuestion(question_id,sort="relevance"):
+def getAnswerByQuestion(question_id,sort="votes"):
     url = "https://api.stackexchange.com/2.3/questions/{0}/answers?order=desc&sort={1}&site=stackoverflow&filter=withbody".format(question_id,sort)
     return requests.get(url).json()
 
 
-def getAnswerById(answer_id,sort="relevance"):
+def getAnswerById(answer_id,sort="votes"):
     url = "https://api.stackexchange.com/2.3/answers/{0}?order=desc&site=stackoverflow&filter=withbody".format(answer_id,sort)
     return requests.get(url).json()
 
